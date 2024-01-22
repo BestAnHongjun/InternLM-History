@@ -42,7 +42,7 @@ cd InternLM-History
 创建虚拟环境。
 
 ```sh
-conda create -n history python=3.7
+conda create -n history python=3.10
 ```
 
 进入虚拟环境。
@@ -54,6 +54,9 @@ conda activate history
 安装依赖项。
 
 ```sh
+conda install gcc_linux-64
+sudo apt-get install mpich libopenmpi-dev
+
 pip install -r requirements.txt
 ```
 
@@ -160,5 +163,24 @@ python scripts/3.split_dataset.py
 ```
 
 训练集见[2022_junior_middle_history_train.json](datasets/2022_junior_middle_history_train.json)，测试集见[2022_junior_middle_history_test.json](datasets/2022_junior_middle_history_test.json)。
+
+</details>
+
+<details>
+<summary id="tune">微调模型</summary>
+
+##### 下载模型
+
+```sh
+sudo apt-get install git git-lfs -y
+git lfs install 
+git lfs clone https://modelscope.cn/Shanghai_AI_Laboratory/internlm-chat-7b.git -b v1.0.3
+```
+
+##### 微调模型
+
+```sh
+xtuner train internlm_chat_7b_qlora_history_e3.py --deepspeed deepspeed_zero2
+```
 
 </details>
