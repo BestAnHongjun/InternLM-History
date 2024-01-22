@@ -1,5 +1,10 @@
 # 基于InternLM大模型的中学历史学习助手
 
+#### [书生·浦语大模型实战营](https://github.com/InternLM/tutorial)·大作业
+
+> 国内Gitee仓库地址：https://gitee.com/an_hongjun/InternLM-History
+> GitHub仓库地址：https://github.com/BestAnHongjun/InternLM-History
+
 项目正在开发中。
 
 ## 简介
