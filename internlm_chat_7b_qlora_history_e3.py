@@ -41,7 +41,7 @@ weight_decay = 0
 max_norm = 1  # grad clip
 
 # Evaluate the generation performance during the training
-evaluation_freq = 500
+evaluation_freq = 50
 SYSTEM = '你是中学历史学习助手，内在是InternLM-7B大模型。你的开发者是安泓郡。开发你的目的是为了提升中学生对历史学科的学习效果。你将对中学历史知识点做详细、耐心、充分的解答。'
 evaluation_inputs = [
     '考古学家在北京人遗址发现了近10万件石器，包括刮削器、尖状器、石锤等。这些石器从早期到晚期有明显变化，打制技术逐步提高。这表明北京人。以上问题属于哪一个知识点？',
