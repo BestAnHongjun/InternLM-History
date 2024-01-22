@@ -18,11 +18,12 @@ if __name__ == "__main__":
 
     print("创建：知识点归纳类问题...")
     for test in tqdm(tests):
+        content = test["content"].replace("##n##", "\n")
         dataset.append({
             "conversation": [
                 {
                     "system": system_prompt,
-                    "input": "请问以下问题属于中学历史学科中的哪一个专题？{}".format(test["content"]),
+                    "input": "请问以下问题属于中学历史学科中的哪一个专题？{}".format(content),
                     "output": "{}。".format(subjects[test["subject_id"] - 1])
                 }
             ]
@@ -31,7 +32,7 @@ if __name__ == "__main__":
             "conversation": [
                 {
                     "system": system_prompt,
-                    "input": "{}。以上问题属于哪一个专题？".format(test["content"]),
+                    "input": "{}。以上问题属于哪一个专题？".format(content),
                     "output": "{}。".format(subjects[test["subject_id"] - 1])
                 }
             ]
@@ -40,7 +41,7 @@ if __name__ == "__main__":
             "conversation": [
                 {
                     "system": system_prompt,
-                    "input": "请问以下问题属于中学历史学科中的哪一个知识点？{}".format(test["content"]),
+                    "input": "请问以下问题属于中学历史学科中的哪一个知识点？{}".format(content),
                     "output": "{}。".format(topics[test["topic_id"] - 1])
                 }
             ]
@@ -49,7 +50,7 @@ if __name__ == "__main__":
             "conversation": [
                 {
                     "system": system_prompt,
-                    "input": "{}。以上问题属于哪一个知识点？".format(test["content"]),
+                    "input": "{}。以上问题属于哪一个知识点？".format(content),
                     "output": "{}。".format(topics[test["topic_id"] - 1])
                 }
             ]
@@ -65,11 +66,12 @@ if __name__ == "__main__":
     for test in tqdm(tests):
         if test["type"] != 0:
             continue
+        content = test["content"].replace("##n##", "\n")
         dataset.append({
             "conversation": [
                 {
                     "system": system_prompt,
-                    "input": "{}：A.{} B.{} C.{} D.{}".format(test["content"], test["choices"][0], test["choices"][1], test["choices"][2], test["choices"][3]),
+                    "input": "{}：A.{} B.{} C.{} D.{}".format(content, test["choices"][0], test["choices"][1], test["choices"][2], test["choices"][3]),
                     "output": "选择{}。{}。".format(choice_func[test["ans"]], test["analysis"])
                 }
             ]
@@ -80,7 +82,7 @@ if __name__ == "__main__":
                     "conversation": [
                         {
                             "system": system_prompt,
-                            "input": "{}：{}".format(test["content"], test["choices"][i]),
+                            "input": "{}：{}".format(content, test["choices"][i]),
                             "output": "正确。"
                         }
                     ]
@@ -89,7 +91,7 @@ if __name__ == "__main__":
                     "conversation": [
                         {
                             "system": system_prompt,
-                            "input": "{}：{}。这句话对吗？".format(test["content"], test["choices"][i]),
+                            "input": "{}：{}。这句话对吗？".format(content, test["choices"][i]),
                             "output": "正确。"
                         }
                     ]
@@ -98,7 +100,7 @@ if __name__ == "__main__":
                     "conversation": [
                         {
                             "system": system_prompt,
-                            "input": "以下说法是否正确？{}：{}。".format(test["content"], test["choices"][i]),
+                            "input": "以下说法是否正确？{}：{}。".format(content, test["choices"][i]),
                             "output": "正确。"
                         }
                     ]
@@ -108,7 +110,7 @@ if __name__ == "__main__":
                     "conversation": [
                         {
                             "system": system_prompt,
-                            "input": "{}：{}".format(test["content"], test["choices"][i]),
+                            "input": "{}：{}".format(content, test["choices"][i]),
                             "output": "错误。"
                         }
                     ]
@@ -117,7 +119,7 @@ if __name__ == "__main__":
                     "conversation": [
                         {
                             "system": system_prompt,
-                            "input": "{}：{}。这句话对吗？".format(test["content"], test["choices"][i]),
+                            "input": "{}：{}。这句话对吗？".format(content, test["choices"][i]),
                             "output": "错误。"
                         }
                     ]
@@ -126,7 +128,7 @@ if __name__ == "__main__":
                     "conversation": [
                         {
                             "system": system_prompt,
-                            "input": "以下说法是否正确？{}：{}。".format(test["content"], test["choices"][i]),
+                            "input": "以下说法是否正确？{}：{}。".format(content, test["choices"][i]),
                             "output": "错误。"
                         }
                     ]
@@ -136,11 +138,12 @@ if __name__ == "__main__":
     for test in tqdm(tests):
         if test["type"] != 1:
             continue
+        content = test["content"].replace("##n##", "\n")
         dataset.append({
             "conversation": [
                 {
                     "system": system_prompt,
-                    "input": "填空题。{}？".format(test["content"]),
+                    "input": "填空题。{}？".format(content),
                     "output": "{}。{}".format(test["ans"], test["analysis"])
                 }
             ]
@@ -149,7 +152,7 @@ if __name__ == "__main__":
             "conversation": [
                 {
                     "system": system_prompt,
-                    "input": "请在“（ ）”中填入适当内容。{}？".format(test["content"]),
+                    "input": "请在“（ ）”中填入适当内容。{}？".format(content),
                     "output": "{}。{}".format(test["ans"], test["analysis"])
                 }
             ]
@@ -158,7 +161,7 @@ if __name__ == "__main__":
             "conversation": [
                 {
                     "system": system_prompt,
-                    "input": "{}？填空".format(test["content"]),
+                    "input": "{}？填空".format(content),
                     "output": "{}。{}".format(test["ans"], test["analysis"])
                 }
             ]
@@ -168,11 +171,12 @@ if __name__ == "__main__":
     for test in tqdm(tests):
         if test["type"] != 2:
             continue
+        content = test["content"].replace("##n##", "\n")
         dataset.append({
             "conversation": [
                 {
                     "system": system_prompt,
-                    "input": "{}？".format(test["content"]),
+                    "input": "{}？".format(content),
                     "output": "{}。{}".format(test["ans"], test["analysis"])
                 }
             ]
