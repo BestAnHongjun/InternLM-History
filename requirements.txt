@@ -1,2 +1,5 @@
 python-docx
 tqdm
+modelscope
+mpi4py
+deepspeed
