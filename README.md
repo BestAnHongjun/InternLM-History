@@ -183,4 +183,27 @@ git lfs clone https://modelscope.cn/Shanghai_AI_Laboratory/internlm-chat-7b.git 
 xtuner train internlm_chat_7b_qlora_history_e3.py --deepspeed deepspeed_zero2
 ```
 
+##### 模型转换
+
+```sh
+mkdir work_dirs/hf_epoch1 work_dirs/hf_epoch2 work_dirs/hf_epoch3 
+export MKL_SERVICE_FORCE_INTEL=1
+
+xtuner convert pth_to_hf ./internlm_chat_7b_qlora_history_e3.py ./work_dirs/internlm_chat_7b_qlora_history_e3/epoch_1.pth ./work_dirs/hf_epoch1
+
+xtuner convert pth_to_hf ./internlm_chat_7b_qlora_history_e3.py ./work_dirs/internlm_chat_7b_qlora_history_e3/epoch_2.pth ./work_dirs/hf_epoch2
+
+xtuner convert pth_to_hf ./internlm_chat_7b_qlora_history_e3.py ./work_dirs/internlm_chat_7b_qlora_history_e3/epoch_3.pth ./work_dirs/hf_epoch3
+```
+
+##### 将Adapter合并到LLM
+
+```sh
+xtuner convert merge ./internlm-chat-7b ./work_dirs/hf_epoch1 ./work_dirs/merged_epoch1 --max-shard-size 2GB
+
+xtuner convert merge ./internlm-chat-7b ./work_dirs/hf_epoch2 ./work_dirs/merged_epoch2 --max-shard-size 2GB
+
+xtuner convert merge ./internlm-chat-7b ./work_dirs/hf_epoch3 ./work_dirs/merged_epoch3 --max-shard-size 2GB
+```
+
 </details>
