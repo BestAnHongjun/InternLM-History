@@ -15,14 +15,14 @@
 
 训练数据来源于“2022年中考历史真题分类-寒假刷题练.docx”，见[2022_junior_middle_classification_all.docx](datasets/src/2022_junior_middle_classification_all.docx)，包含了**初中历史32个专题、127个考点**的若干考题。
 
-由**程序+人工**对数据进行拆分+清洗，保证数据质量。剔除了含有图、表的题目，仅保留含有文字的题目。经处理标准化后的json格式题库见[2022_junior_middle_classification_std.json](datasets/middle/2022_junior_middle_classification_std.json)，共有**1056**个题目，包含**选择题、填空题和综合题**。
+由**程序+人工**对数据进行拆分+清洗（具体处理方式见[数据集准备](#prepare)部分），保证数据质量。剔除了含有图、表的题目，仅保留含有文字的题目。经处理标准化后的json格式题库见[2022_junior_middle_classification_std.json](datasets/middle/2022_junior_middle_classification_std.json)，共有**1056**个题目，包含**选择题、填空题和综合题**。
 
 >注意：本项目仅供开源社区学习、交流使用。题库中已注明题目来源，若用于商用，请自行与来源联系。
 
 ## 项目部署
 
 <details>
-<summary>环境配置</summary>
+<summary id="setup">环境配置</summary>
 
 下载项目仓库。
 
@@ -60,7 +60,7 @@ pip install -r requirements.txt
 </details>
 
 <details>
-<summary>数据集准备</summary>
+<summary id="prepare">数据集准备</summary>
 
 数据来源于“2022年中考历史真题分类-寒假刷题练.docx”，见[2022_junior_middle_classification_all.docx](datasets/src/2022_junior_middle_classification_all.docx)，包含了初中历史32个专题、127个考点的若干考题。
 
