@@ -42,7 +42,7 @@ cd InternLM-History
 创建虚拟环境。
 
 ```sh
-conda create -n history python=3.10
+conda create -n history python=3.9
 ```
 
 进入虚拟环境。
@@ -51,10 +51,13 @@ conda create -n history python=3.10
 conda activate history
 ```
 
-安装依赖项。
+安装依赖项
+* 默认cuda版本为11.7，若不是请修改torch版本使与cuda版本对应，否则影响flash-attention安装
+* 默认从Gitee下载`Flash-Attention`，若要从github下载，请将`setup.sh`中对应地址改为`https://github.com/Dao-AILab/flash-attention`
+* 本步骤受网速和机器性能影响，时间可能在半小时以上
 
 ```sh
-pip install -r requirements.txt
+./setup.sh
 ```
 
 </details>
