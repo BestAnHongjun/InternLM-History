@@ -1,6 +1,6 @@
 # setup environments
 import os 
-# os.system("./setup.sh")
+os.system("./setup.sh")
 os.environ["no_proxy"] = "localhost,127.0.0.1,::1"
 
 import gradio as gr
