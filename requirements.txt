@@ -2,3 +2,4 @@ python-docx
 tqdm
 openxlab
 xtuner[deepspeed]
+gradio
