@@ -1,3 +1,7 @@
+# setup environments
+import os 
+os.system("./setup.sh")
+
 import gradio as gr
 
 
