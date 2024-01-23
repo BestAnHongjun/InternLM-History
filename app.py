@@ -1,6 +1,7 @@
 # setup environments
 import os 
-os.system("./setup.sh")
+# os.system("./setup.sh")
+os.environ["no_proxy"] = "localhost,127.0.0.1,::1"
 
 import gradio as gr
 
@@ -10,4 +11,4 @@ def greet(name):
 
 
 iface = gr.Interface(fn=greet, inputs="text", outputs="text")
-iface.launch()
+iface.launch(share=True)
