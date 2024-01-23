@@ -1,7 +1,4 @@
 python-docx
 tqdm
-modelscope
-mpi4py
-deepspeed
-streamlit==1.24.0
 openxlab
+xtuner[deepspeed]
