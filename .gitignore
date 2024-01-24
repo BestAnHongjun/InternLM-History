@@ -5,3 +5,5 @@ work_dirs
 InternLM
 flash-attention
 model
+workspace
+quant_output
