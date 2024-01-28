@@ -13,4 +13,4 @@ cd flash-attention
 MAX_JOBS=8 python setup.py install
 cd ..
 
-pip install lmdeploy[all]==v0.1.0
+pip install lmdeploy[all]==v0.2.1
