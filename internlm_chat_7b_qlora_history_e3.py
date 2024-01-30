@@ -21,7 +21,7 @@ from xtuner.utils import PROMPT_TEMPLATE
 #                          PART 1  Settings                           #
 #######################################################################
 # Model
-pretrained_model_name_or_path = './internlm-chat-7b'
+pretrained_model_name_or_path = './model/internlm-chat-7b'
 
 # Data
 data_path = './datasets/2022_junior_middle_history_train.json'
