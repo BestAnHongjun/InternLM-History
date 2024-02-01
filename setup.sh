@@ -9,7 +9,7 @@ pip install xtuner[deepspeed]
 # MAX_JOBS=4 pip install flash-attn --no-build-isolation
 git clone https://gitee.com/an_hongjun/flash-attention.git
 cd flash-attention
-MAX_JOBS=8 python setup.py install
+MAX_JOBS=4 python setup.py install
 cd ..
 
 pip install lmdeploy[all]==v0.1.0
