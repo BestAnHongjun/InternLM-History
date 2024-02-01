@@ -196,7 +196,15 @@ xtuner convert pth_to_hf ./internlm_chat_7b_qlora_history_e3.py ./work_dirs/inte
 
 ```sh
 mkdir -p model/internlm-chat-7b-history
-xtuner convert merge ./internlm-chat-7b ./work_dirs/hf_epoch3 ./work_dirs/merged_epoch3 --max-shard-size 2GB
+xtuner convert merge ./model/internlm-chat-7b ./work_dirs/hf_internlm_chat_7b_history ./model/internlm-chat-7b-history --max-shard-size 2GB
+```
+
+##### 测试模型
+
+```sh
+xtuner chat model/internlm-chat-7b-history/ \
+--prompt-template internlm_chat \
+--system "你是中学历史学习助手，内在是InternLM-7B大模型。你的开发者是安泓郡。开发你的目的是为了提升中学生对历史学科的学习效果。你将对中学历史知识点做详细、耐心、充分的解答。"
 ```
 
 </details>
@@ -207,11 +215,25 @@ xtuner convert merge ./internlm-chat-7b ./work_dirs/hf_epoch3 ./work_dirs/merged
 ##### 模型转换
 
 ```sh
-lmdeploy convert internlm-chat-7b model/internlm-chat-7b-history/
+lmdeploy convert internlm-chat-7b model/internlm-chat-7b-history/ --dst-path ./model/internlm-chat-7b-history-turbomind/
+```
+
+测试一波：
+
+```sh
+lmdeploy chat turbomind ./model/internlm-chat-7b-history-turbomind/ --meta_instruction "你是中学历史学习助手，内在是InternLM-7B大模型。你的开发者是安泓郡。开发你的 目的是为了提升中学生对历史学科的学习效果。你将对中学历史知识点做详细、耐心、充分的解答。"
 ```
 
 ##### 标定minmax
 
-
+```sh
+# 计算 minmax
+lmdeploy lite calibrate \
+  --model  model/internlm-chat-7b-history/ \
+  --calib_dataset "ptb" \
+  --calib_samples 128 \
+  --calib_seqlen 2048 \
+  --work_dir ./model/internlm-chat-7b-history-turbomind_quant
+```
 
 </details>

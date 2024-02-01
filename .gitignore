@@ -1,6 +1,7 @@
 .idea
 .vscode
 work_dirs
+test*
 .empty
 InternLM
 flash-attention

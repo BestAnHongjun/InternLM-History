@@ -4,22 +4,32 @@ if not os.path.exists("flash-attention"):
     os.system("./setup.sh")
 
 import gradio as gr
+from lmdeploy import turbomind as tm
 from openxlab.model import download
+
+
+PROMPT_TEMPLATE = """
+<|System|>:你是中学历史学习助手，内在是InternLM-7B大模型。你的开发者是安泓郡。开发你的目的是为了提升中学生对历史学科的学习效果。你将对中学历史知识点做详细、耐心、充分的解答。
+<|User|>:{}
+<|Bot|>:"""
     
 
 def download_model():
-    download(model_repo='Coder-AN/InternLM-History', output='model/internlm-chat-7b-history')
-
-
-def greet(name):
-    return "您的输入是：" + name + "。这只是一个测试Demo，项目仍在开发中。"
+    if not os.path.exists("model/InternLM-History-Model-TurboMind-W4A16"):
+        download(model_repo='Coder-AN/InternLM-History-Model-TurboMind-W4A16', output='model/InternLM-History-Model-TurboMind-W4A16', cache=False)
+        os.system("unzip -n model/InternLM-History-Model-TurboMind-W4A16/internlm-chat-7b-history-turbomind-w4a16.zip -d model/InternLM-History-Model-TurboMind-W4A16")
 
 
 def api(question: str, chat_history: list=[]):
     if question == None or len(question) < 1:
         return "", chat_history
     try:
-        chat_history.append((question, "haha"))
+        prompt = PROMPT_TEMPLATE.format(question)
+        input_ids = tm_model.tokenizer.encode(prompt)
+        for outputs in generator.stream_infer(session_id=0, input_ids=[input_ids]):
+            res, tokens = outputs[0]
+        response = tm_model.tokenizer.decode(res.tolist())
+        chat_history.append((question, response))
         return "", chat_history
     except Exception as e:
         return e, chat_history
@@ -29,13 +39,17 @@ if __name__ == "__main__":
     os.environ["no_proxy"] = "localhost,127.0.0.1,::1"
     download_model()
 
+    model_path = "model/InternLM-History-Model-TurboMind-W4A16/internlm-chat-7b-history-turbomind-w4a16"
+    tm_model = tm.TurboMind.from_pretrained(model_path)
+    generator = tm_model.create_instance()
+
     block = gr.Blocks()
     with block as demo:
         with gr.Row(equal_height=True):   
             with gr.Column(scale=15):
                 # 展示的页面标题
-                gr.Markdown("""<h1><center>InternLM</center></h1>
-                    <center>书生浦语</center>
+                gr.Markdown("""<h1><center>InternLM-History</center></h1>
+                    <center>中学历史学习助手</center>
                     """)
 
         with gr.Row():
