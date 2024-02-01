@@ -9,8 +9,9 @@ pip install xtuner[deepspeed]
 # MAX_JOBS=4 pip install flash-attn --no-build-isolation
 mkdir flash-attention
 cd flash-attention
-wget -N https://github.com/Dao-AILab/flash-attention/releases/download/v2.3.5/flash_attn-2.3.5+cu117torch2.0cxx11abiTRUE-cp39-cp39-linux_x86_64.whl
-pip install flash_attn-2.3.5+cu117torch2.0cxx11abiTRUE-cp39-cp39-linux_x86_64.whl
+wget -N https://gitee.com/an_hongjun/flash-attention/releases/download/2.3.5/flash_attn-2.3.5%20cu117torch2.0cxx11abiTRUE-cp39-cp39-linux_x86_64.whl
+mv "flash_attn-2.3.5 cu117torch2.0cxx11abiTRUE-cp39-cp39-linux_x86_64.whl" "flash_attn-2.3.5+cu117torch2.0cxx11abiTRUE-cp39-cp39-linux_x86_64.whl"
+pip install "flash_attn-2.3.5+cu117torch2.0cxx11abiTRUE-cp39-cp39-linux_x86_64.whl"
 cd ..
 # git clone https://gitee.com/an_hongjun/flash-attention.git
 # cd flash-attention

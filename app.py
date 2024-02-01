@@ -15,6 +15,7 @@ PROMPT_TEMPLATE = """
     
 
 def download_model():
+    os.makedirs("model", exist_ok=True)
     if not os.path.exists("model/InternLM-History-Model-TurboMind-W4A16"):
         download(model_repo='Coder-AN/InternLM-History-Model-TurboMind-W4A16', output='model/InternLM-History-Model-TurboMind-W4A16', cache=False)
         os.system("unzip -n model/InternLM-History-Model-TurboMind-W4A16/internlm-chat-7b-history-turbomind-w4a16.zip -d model/InternLM-History-Model-TurboMind-W4A16")
