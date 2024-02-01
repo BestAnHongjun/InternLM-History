@@ -265,12 +265,4 @@ lmdeploy convert  internlm-chat-7b \
     --dst_path model/InternLM-History-Model-TurboMind-W4A16/internlm-chat-7b-history-turbomind-w4a16
 ```
 
-##### 修改配置文件
-
-修改`model/InternLM-History-Model-TurboMind-W4A16/internlm-chat-7b-history-turbomind-w4a16/triton_models/weights/config.ini`:
-
-```ini
-quant_policy = 4
-```
-
 </details>
