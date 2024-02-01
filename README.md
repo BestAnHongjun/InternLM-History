@@ -62,6 +62,15 @@ conda activate history
 
 </details>
 
+<details>
+<summary id="setup">启动项目</summary>
+
+```sh
+python app.py
+```
+
+</details>
+
 ## 项目开发
 
 <details>
@@ -233,7 +242,35 @@ lmdeploy lite calibrate \
   --calib_dataset "ptb" \
   --calib_samples 128 \
   --calib_seqlen 2048 \
-  --work_dir ./model/internlm-chat-7b-history-turbomind_quant
+  --work_dir ./model/internlm-chat-7b-history-quant
+```
+
+##### 获取量化参数
+
+```sh
+lmdeploy lite auto_awq \
+  --model  ./model/internlm-chat-7b/ \
+  --w_bits 4 \
+  --w_group_size 128 \
+  --work_dir model/internlm-chat-7b-quant
+```
+
+##### 转换为TurboMind格式
+
+```sh
+lmdeploy convert  internlm-chat-7b \
+    ./model/internlm-chat-7b-history-quant \
+    --model-format awq \
+    --group-size 128 \
+    --dst_path model/InternLM-History-Model-TurboMind-W4A16/internlm-chat-7b-history-turbomind-w4a16
+```
+
+##### 修改配置文件
+
+修改`model/InternLM-History-Model-TurboMind-W4A16/internlm-chat-7b-history-turbomind-w4a16/triton_models/weights/config.ini`:
+
+```ini
+quant_policy = 4
 ```
 
 </details>
