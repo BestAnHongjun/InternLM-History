@@ -26,9 +26,7 @@ PROMPT_TEMPLATE = """
     
 
 def download_model():
-    if not os.path.exists("model/internlm-chat-7b-history"):
-        os.makedirs("model/internlm-chat-7b-history", exist_ok=True)
-        download(model_repo='Coder-AN/InternLM-History-Model', output="model/internlm-chat-7b-history", cache=False)
+    download(model_repo='Coder-AN/InternLM-History-Model', output="model/internlm-chat-7b-history")
     if not os.path.exists("model/internlm-chat-7b-history-turbomind"):
         # 模型转换
         cmd = """lmdeploy convert internlm-chat-7b \
