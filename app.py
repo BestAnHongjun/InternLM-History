@@ -26,12 +26,12 @@ PROMPT_TEMPLATE = """
     
 
 def download_model():
-
     snapshot_download(
         repo_id="Coder-AN/InternLM-Chat-7B-History",
         local_dir="model/internlm-chat-7b-history",
         local_dir_use_symlinks=False,
-        resume_download=True
+        resume_download=True,
+        endpoint='https://hf-mirror.com'
     )
     # ak = os.getenv("OPENXLAB_AK")
     # sk = os.getenv("OPENXLAB_SK")
