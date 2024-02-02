@@ -21,7 +21,7 @@ def download_model():
         ak = os.getenv("OPENXLAB_AK")
         sk = os.getenv("OPENXLAB_SK")
         openxlab.login(ak=ak,sk=sk)
-        download(model_repo='Coder-AN/InternLM-History-Model-TurboMind-W4A16', output='model/InternLM-History-Model-TurboMind-W4A16', cache=False)
+        download(model_repo='Coder-AN/InternLM-History-Model-TurboMind-W4A16', output='model/InternLM-History-Model-TurboMind-W4A16', model_name="internlm-chat-7b-history-turbomind-w4a16.zip", cache=False)
         os.system("unzip -n model/InternLM-History-Model-TurboMind-W4A16/internlm-chat-7b-history-turbomind-w4a16.zip -d model/InternLM-History-Model-TurboMind-W4A16")
 
 
