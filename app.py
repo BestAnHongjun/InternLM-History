@@ -8,6 +8,17 @@ from openxlab.model import download
 from lmdeploy import turbomind as tm
 
 
+MD5 = {
+    "pytorch_model-00001-of-00008.bin": "3aa96b2686c72ce5c1c12dbb251f52c8",
+    "pytorch_model-00002-of-00008.bin": "3135f7626e19827b319f8448f0e7f63a",
+    "pytorch_model-00003-of-00008.bin": "cd23c24fe5fb2f990ac5a078e787615d",
+    "pytorch_model-00004-of-00008.bin": "7b13e0526772b65a43b64e36fe28055f",
+    "pytorch_model-00005-of-00008.bin": "dc8d33d528a3c3f3609f55f53d82e9b6",
+    "pytorch_model-00006-of-00008.bin": "ca37e9e409abc7bd0298ebd537075e4b",
+    "pytorch_model-00007-of-00008.bin": "b64fde4eabb90252ca8981cc6d71b617",
+    "pytorch_model-00008-of-00008.bin": "bba8111f1beb1e7d8115c0871c9bbd8d"
+}
+
 PROMPT_TEMPLATE = """
 <|System|>:你是中学历史学习助手，内在是InternLM-7B大模型。你的开发者是安泓郡。开发你的目的是为了提升中学生对历史学科的学习效果。你将对中学历史知识点做详细、耐心、充分的解答。
 <|User|>:{}
@@ -15,10 +26,18 @@ PROMPT_TEMPLATE = """
     
 
 def download_model():
-    if not os.path.exists("model/InternLM-History-Model-TurboMind-W4A16"):
-        os.makedirs("model/InternLM-History-Model-TurboMind-W4A16", exist_ok=True)
-        download(model_repo='Coder-AN/InternLM-History-Model-TurboMind-W4A16', output="model/InternLM-History-Model-TurboMind-W4A16")
-        os.system("unzip -n model/InternLM-History-Model-TurboMind-W4A16/internlm-chat-7b-history-turbomind-w4a16.zip -d model/InternLM-History-Model-TurboMind-W4A16")
+    if not os.path.exists("model/internlm-chat-7b-history"):
+        os.makedirs("model/internlm-chat-7b-history", exist_ok=True)
+        download(model_repo='Coder-AN/InternLM-History-Model', output="model/internlm-chat-7b-history", cache=False)
+    if not os.path.exists("model/internlm-chat-7b-history-turbomind"):
+        # 模型转换
+        cmd = """lmdeploy convert internlm-chat-7b \
+                    model/internlm-chat-7b-history \
+                    --dst-path model/internlm-chat-7b-history-turbomind/"""
+        os.system(cmd)
+
+    exit(0)
+
 
 
 def api(question: str, chat_history: list=[]):
