@@ -29,6 +29,8 @@ PROMPT_TEMPLATE = """
 def download_model():
     ak = os.getenv(OPENXLAB_AK)
     sk = os.getenv(OPENXLAB_SK)
+    print("ak", ak)
+    print("sk", sk)
     openxlab.login(ak, sk)
     download(model_repo='Coder-AN/InternLM-History-Model', output="model/internlm-chat-7b-history")
     if not os.path.exists("model/internlm-chat-7b-history-turbomind"):
