@@ -1,8 +1,8 @@
+# 基于InternLM大模型的中学历史学习助手
+
 <div align="center">
 <img src="./attach/logo.jpg" width="500px"/>
 </div>
-
-# 基于InternLM大模型的中学历史学习助手
 
 #### [书生·浦语大模型实战营](https://github.com/InternLM/tutorial)·大作业
 
