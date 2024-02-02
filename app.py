@@ -27,8 +27,8 @@ PROMPT_TEMPLATE = """
     
 
 def download_model():
-    ak = os.getenv(OPENXLAB_AK)
-    sk = os.getenv(OPENXLAB_SK)
+    ak = os.getenv("OPENXLAB_AK")
+    sk = os.getenv("OPENXLAB_SK")
     print("ak", ak)
     print("sk", sk)
     openxlab.login(ak, sk)

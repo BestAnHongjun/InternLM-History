@@ -2,7 +2,7 @@ pip install ninja
 pip install packaging
 pip install python-docx
 pip install tqdm
-pip install openxlab
+pip install openxlab==0.0.34
 pip install torch==2.0.1
 pip install xtuner[deepspeed]
 
