@@ -3,10 +3,9 @@ import os
 if not os.path.exists("flash-attention"):
     os.system("./setup.sh")
 
-import openxlab
 import gradio as gr
-from openxlab.model import download
 from lmdeploy import turbomind as tm
+from huggingface_hub import snapshot_download
 
 
 MD5 = {
@@ -27,18 +26,25 @@ PROMPT_TEMPLATE = """
     
 
 def download_model():
-    ak = os.getenv("OPENXLAB_AK")
-    sk = os.getenv("OPENXLAB_SK")
-    print("ak", ak)
-    print("sk", sk)
-    openxlab.login(ak, sk)
-    download(model_repo='Coder-AN/InternLM-History-Model', output="model/internlm-chat-7b-history")
-    if not os.path.exists("model/internlm-chat-7b-history-turbomind"):
-        # 模型转换
-        cmd = """lmdeploy convert internlm-chat-7b \
-                    model/internlm-chat-7b-history \
-                    --dst-path model/internlm-chat-7b-history-turbomind/"""
-        os.system(cmd)
+
+    snapshot_download(
+        repo_id="Coder-AN/InternLM-Chat-7B-History",
+        local_dir="model/internlm-chat-7b-history",
+        local_dir_use_symlinks=False,
+        resume_download=True
+    )
+    # ak = os.getenv("OPENXLAB_AK")
+    # sk = os.getenv("OPENXLAB_SK")
+    # print("ak", ak)
+    # print("sk", sk)
+    # openxlab.login(ak, sk)
+    # download(model_repo='Coder-AN/InternLM-History-Model', output="model/internlm-chat-7b-history")
+    # if not os.path.exists("model/internlm-chat-7b-history-turbomind"):
+    #     # 模型转换
+    #     cmd = """lmdeploy convert internlm-chat-7b \
+    #                 model/internlm-chat-7b-history \
+    #                 --dst-path model/internlm-chat-7b-history-turbomind/"""
+    #     os.system(cmd)
 
     exit(0)
 
