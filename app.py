@@ -3,6 +3,7 @@ import os
 if not os.path.exists("flash-attention"):
     os.system("./setup.sh")
 
+import openxlab
 import gradio as gr
 from lmdeploy import turbomind as tm
 from openxlab.model import download
@@ -17,6 +18,9 @@ PROMPT_TEMPLATE = """
 def download_model():
     if not os.path.exists("model/InternLM-History-Model-TurboMind-W4A16"):
         os.makedirs("model/InternLM-History-Model-TurboMind-W4A16", exist_ok=True)
+        ak = os.getenv("OPENXLAB_AK")
+        sk = os.getenv("OPENXLAB_SK")
+        openxlab.login(ak=ak,sk=sk)
         download(model_repo='Coder-AN/InternLM-History-Model-TurboMind-W4A16', output='model/InternLM-History-Model-TurboMind-W4A16', cache=False)
         os.system("unzip -n model/InternLM-History-Model-TurboMind-W4A16/internlm-chat-7b-history-turbomind-w4a16.zip -d model/InternLM-History-Model-TurboMind-W4A16")
 
