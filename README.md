@@ -12,7 +12,7 @@
 > 国内Gitee仓库地址：https://gitee.com/an_hongjun/InternLM-History \
 > GitHub仓库地址：https://github.com/BestAnHongjun/InternLM-History
 
-项目正在开发中。
+[[OpenXLab]](https://openxlab.org.cn/apps/detail/Coder-AN/InternLM-History)  [[ModelScope]](https://www.modelscope.cn/models/CoderAN/InternHistory/summary) [[BiliBili]](https://www.bilibili.com/video/BV11t421H7yQ/?vd_source=8d5b18c3e81d76ac1d81cb328e0d506b)
 
 ## 简介
 
