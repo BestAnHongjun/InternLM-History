@@ -5,7 +5,7 @@ if not os.path.exists("flash-attention"):
 
 import gradio as gr
 from lmdeploy import turbomind as tm
-from huggingface_hub import snapshot_download
+from modelscope.hub.snapshot_download import snapshot_download
 
 
 MD5 = {
@@ -26,28 +26,11 @@ PROMPT_TEMPLATE = """
     
 
 def download_model():
-    snapshot_download(
-        repo_id="Coder-AN/InternLM-Chat-7B-History",
-        local_dir="model/internlm-chat-7b-history",
-        local_dir_use_symlinks=False,
-        resume_download=True,
-        endpoint='https://hf-mirror.com'
+    model_dir = snapshot_download(
+        'CoderAN/InternHistory-TurboMind-W4A16', 
+        cache_dir='model/internlm-chat-7b-history', 
     )
-    # ak = os.getenv("OPENXLAB_AK")
-    # sk = os.getenv("OPENXLAB_SK")
-    # print("ak", ak)
-    # print("sk", sk)
-    # openxlab.login(ak, sk)
-    # download(model_repo='Coder-AN/InternLM-History-Model', output="model/internlm-chat-7b-history")
-    # if not os.path.exists("model/internlm-chat-7b-history-turbomind"):
-    #     # 模型转换
-    #     cmd = """lmdeploy convert internlm-chat-7b \
-    #                 model/internlm-chat-7b-history \
-    #                 --dst-path model/internlm-chat-7b-history-turbomind/"""
-    #     os.system(cmd)
-
-    exit(0)
-
+    return model_dir
 
 
 def api(question: str, chat_history: list=[]):
@@ -67,9 +50,8 @@ def api(question: str, chat_history: list=[]):
 
 if __name__ == "__main__":
     os.environ["no_proxy"] = "localhost,127.0.0.1,::1"
-    download_model()
+    model_path = download_model()
 
-    model_path = "model/InternLM-History-Model-TurboMind-W4A16/internlm-chat-7b-history-turbomind-w4a16"
     tm_model = tm.TurboMind.from_pretrained(model_path)
     generator = tm_model.create_instance()
 
