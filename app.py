@@ -78,7 +78,7 @@ if __name__ == "__main__":
         with gr.Row(equal_height=True):   
             with gr.Column(scale=15):
                 # 展示的页面标题
-                gr.Markdown("""<h1><center>InternLM-History</center></h1>
+                gr.Markdown("""<h1><center>InternHistory</center></h1>
                     <center>中学历史学习助手</center>
                     """)
 
